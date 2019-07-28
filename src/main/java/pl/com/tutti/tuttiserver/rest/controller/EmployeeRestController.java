@@ -1,5 +1,6 @@
-package pl.com.tutti.tuttiserver.rest;
+package pl.com.tutti.tuttiserver.rest.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,12 @@ public class EmployeeRestController {
 	@GetMapping("/employees")
 	public List<Employee> findAll(){
 		return employeeDAO.findAll();
+	}
+	
+	@GetMapping("/hello")
+	public String sayHello(Principal principal) {
+		
+		return principal.getName();
 	}
 
 }

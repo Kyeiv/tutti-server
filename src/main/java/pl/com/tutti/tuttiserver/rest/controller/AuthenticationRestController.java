@@ -1,4 +1,4 @@
-package pl.com.tutti.tuttiserver.rest;
+package pl.com.tutti.tuttiserver.rest.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
