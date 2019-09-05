@@ -13,23 +13,23 @@ import pl.com.tutti.tuttiserver.entity.Employee;
 
 @Repository
 public class EmployeeDAOHibernateImpl implements EmployeeDAO {
-	
-	private EntityManager entityManager;
-	
-	@Autowired
-	public EmployeeDAOHibernateImpl(EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
 
-	@Override
-	public List<Employee> findAll() {
-		Session currentSession = entityManager.unwrap(Session.class);
-		
-		Query<Employee> query = currentSession.createQuery("from Employee", Employee.class);
-		
-		List<Employee> employees = query.getResultList();
-		
-		return employees;
-	}
+    private EntityManager entityManager;
+
+    @Autowired
+    public EmployeeDAOHibernateImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    @Override
+    public List<Employee> findAll() {
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Query<Employee> query = currentSession.createQuery("from Employee", Employee.class);
+
+        List<Employee> employees = query.getResultList();
+
+        return employees;
+    }
 
 }
