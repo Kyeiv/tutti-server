@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,6 +22,8 @@ import pl.com.tutti.tuttiserver.rest.authentication.SimpleAuthenticationEntryPoi
 import pl.com.tutti.tuttiserver.rest.authentication.SimpleAuthenticationFailureHandler;
 import pl.com.tutti.tuttiserver.rest.authentication.SimpleAuthenticationSuccessHandler;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -31,12 +34,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private SimpleAuthenticationFailureHandler authenticationFailureHandler;
 	@Autowired
 	private SimpleAuthenticationSuccessHandler authenticationSuccessHandler;
+	@Autowired
+	@Qualifier("secutiyDataSource")
+	private DataSource securityDataSource;
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		auth.inMemoryAuthentication().withUser("user").password("{noop}user").roles("USER").and().withUser("admin")
-		.password("{noop}admin").roles("ADMIN");
+		//auth.inMemoryAuthentication().withUser("user").password("{noop}user").roles("USER").and().withUser("admin")
+		//.password("{noop}admin").roles("ADMIN");
+		auth.jdbcAuthentication().dataSource(securityDataSource);
 	}
 	
 //	@Bean
