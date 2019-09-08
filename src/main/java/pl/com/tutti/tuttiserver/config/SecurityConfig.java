@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -40,18 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
-		//auth.inMemoryAuthentication().withUser("user").password("{noop}user").roles("USER").and().withUser("admin")
-		//.password("{noop}admin").roles("ADMIN");
 		auth.jdbcAuthentication().dataSource(securityDataSource);
 	}
-	
-//	@Bean
-//    CorsFilter corsFilter() {
-//        CorsFilter filter = new CorsFilter();
-//        return filter;
-//    }
-	
+
 	@Bean
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration configuration = new CorsConfiguration();
@@ -77,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //	    .addFilterBefore(corsFilter(), SessionManagementFilter.class)
 	    .authorizeRequests() 
 	    //.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-	    .antMatchers("/auth/**").authenticated()
+	    .antMatchers("/auth/**").permitAll()
 	    .antMatchers("/api/**").authenticated()
 	    .and()
 	    .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)

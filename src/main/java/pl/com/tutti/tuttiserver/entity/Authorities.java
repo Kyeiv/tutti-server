@@ -19,5 +19,4 @@ public class Authorities {
 
     @EmbeddedId
     private AuthoritiesPK authoritiesPK;
-
 }
