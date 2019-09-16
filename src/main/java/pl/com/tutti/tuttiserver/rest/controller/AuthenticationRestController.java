@@ -11,6 +11,7 @@ import pl.com.tutti.tuttiserver.rest.request.RegistrationForm;
 import pl.com.tutti.tuttiserver.rest.response.RegisterResponse;
 import pl.com.tutti.tuttiserver.service.UsersService;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class AuthenticationRestController {
 
 	@PostMapping("/registration")
 	public String registration(
-			@RequestBody RegistrationForm registrationForm
+			@Valid @RequestBody RegistrationForm registrationForm
 			) {
 
 		Users registered = new Users();
