@@ -7,24 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import pl.com.tutti.tuttiserver.dao.EmployeeDAO;
-import pl.com.tutti.tuttiserver.entity.Employee;
+import pl.com.tutti.tuttiserver.entity.Users;
+import pl.com.tutti.tuttiserver.service.UsersService;
 
 @RestController
 @RequestMapping("/api")
-public class EmployeeRestController {
+public class UsersRestController {
 	
-	private EmployeeDAO employeeDAO;
+	private UsersService usersService;
 
 	@Autowired
-	public EmployeeRestController(EmployeeDAO employeeDAO) {
-		this.employeeDAO = employeeDAO;
+	public UsersRestController(UsersService usersService) {
+		this.usersService = usersService;
 	}
 	
-	@GetMapping("/employees")
-	public List<Employee> findAll(){
-		return employeeDAO.findAll();
+	@GetMapping("/users")
+	public List<Users> findAll(){
+		return usersService.findAll();
 	}
 	
 	@GetMapping("/hello")

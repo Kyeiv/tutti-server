@@ -25,30 +25,24 @@ public class Users {
     private Boolean enabled;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_details_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_details_id")
     private UserDetails userdDetailId;
 
-    @OneToMany
-    @JoinColumn(name = "tutor")
+    @OneToMany(mappedBy = "tutor")
     private List<Appointments> appointmentsAsTutor;
 
-    @OneToMany
-    @JoinColumn(name = "student")
+    @OneToMany(mappedBy = "student")
     private List<Appointments> appointmentsAsStudent;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "username")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
     private List<Specializations> specializations;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "username")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
     private List<Availbility> availbility;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "username")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "authoritiesPK.username")
     private List<Authorities> authorities;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "username")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
     private List<Posts> posts;
 }
