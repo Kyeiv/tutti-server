@@ -1,6 +1,7 @@
 package pl.com.tutti.tuttiserver.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.com.tutti.tuttiserver.entity.Authorities;
@@ -9,6 +10,7 @@ import pl.com.tutti.tuttiserver.entity.UserDetails;
 import pl.com.tutti.tuttiserver.entity.Users;
 import pl.com.tutti.tuttiserver.rest.request.RegistrationForm;
 import pl.com.tutti.tuttiserver.rest.response.RegisterResponse;
+import pl.com.tutti.tuttiserver.rest.response.error.RegisterErrorResponse;
 import pl.com.tutti.tuttiserver.service.UsersService;
 
 import javax.validation.Valid;
@@ -28,7 +30,7 @@ public class AuthenticationRestController {
 	}
 
 	@PostMapping("/registration")
-	public String registration(
+	public ResponseEntity registration(
 			@Valid @RequestBody RegistrationForm registrationForm
 			) {
 
@@ -43,7 +45,7 @@ public class AuthenticationRestController {
 		registered.setEnabled(Boolean.TRUE);
 
 		registered.setUsername(registrationForm.getUsername());
-		registered.setPassword(registrationForm.getPassword());
+		registered.setPassword("{noop}" + registrationForm.getPassword());
 
 		UserDetails userDetails = new UserDetails().builder()
 				.city(registrationForm.getCity())
@@ -58,6 +60,11 @@ public class AuthenticationRestController {
 
 		usersService.save(registered);
 
-		return "Registered";
+		RegisterResponse registerResponse = new RegisterResponse();
+		registerResponse.setMessage("Registered succesfully!");
+		registerResponse.setStatus(HttpStatus.OK.value());
+		registerResponse.setTimeStamp(System.currentTimeMillis());
+
+		return new ResponseEntity<>(registerResponse, HttpStatus.OK);
 	}
 }
