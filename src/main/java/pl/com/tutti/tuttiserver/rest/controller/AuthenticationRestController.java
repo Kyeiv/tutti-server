@@ -5,12 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.com.tutti.tuttiserver.entity.Authorities;
-import pl.com.tutti.tuttiserver.entity.AuthoritiesPK;
+import pl.com.tutti.tuttiserver.entity.privatekey.AuthoritiesPK;
 import pl.com.tutti.tuttiserver.entity.UserDetails;
 import pl.com.tutti.tuttiserver.entity.Users;
 import pl.com.tutti.tuttiserver.rest.request.RegistrationForm;
 import pl.com.tutti.tuttiserver.rest.response.RegisterResponse;
-import pl.com.tutti.tuttiserver.rest.response.error.RegisterErrorResponse;
 import pl.com.tutti.tuttiserver.service.UsersService;
 
 import javax.validation.Valid;

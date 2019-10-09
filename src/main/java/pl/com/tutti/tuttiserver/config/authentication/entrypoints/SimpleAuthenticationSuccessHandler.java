@@ -1,4 +1,4 @@
-package pl.com.tutti.tuttiserver.rest.authentication;
+package pl.com.tutti.tuttiserver.config.authentication.entrypoints;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;

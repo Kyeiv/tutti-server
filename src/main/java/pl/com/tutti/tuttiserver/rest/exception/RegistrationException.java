@@ -1,4 +1,4 @@
-package pl.com.tutti.tuttiserver.rest.response.error.exception;
+package pl.com.tutti.tuttiserver.rest.exception;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;

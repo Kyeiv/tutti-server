@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.com.tutti.tuttiserver.entity.privatekey.AuthoritiesPK;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;

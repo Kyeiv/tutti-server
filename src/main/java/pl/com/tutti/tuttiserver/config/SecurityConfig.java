@@ -17,9 +17,9 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import pl.com.tutti.tuttiserver.config.webfilter.CsrfTokenResponseHeaderBindingFilter;
-import pl.com.tutti.tuttiserver.rest.authentication.SimpleAuthenticationEntryPoint;
-import pl.com.tutti.tuttiserver.rest.authentication.SimpleAuthenticationFailureHandler;
-import pl.com.tutti.tuttiserver.rest.authentication.SimpleAuthenticationSuccessHandler;
+import pl.com.tutti.tuttiserver.config.authentication.entrypoints.SimpleAuthenticationEntryPoint;
+import pl.com.tutti.tuttiserver.config.authentication.entrypoints.SimpleAuthenticationFailureHandler;
+import pl.com.tutti.tuttiserver.config.authentication.entrypoints.SimpleAuthenticationSuccessHandler;
 
 import javax.sql.DataSource;
 
@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private SimpleAuthenticationSuccessHandler authenticationSuccessHandler;
 	@Autowired
-	@Qualifier("secutiyDataSource")
+	//@Qualifier("secutiyDataSource")
 	private DataSource securityDataSource;
 	
 	@Override

@@ -1,4 +1,4 @@
-package pl.com.tutti.tuttiserver.entity;
+package pl.com.tutti.tuttiserver.entity.privatekey;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

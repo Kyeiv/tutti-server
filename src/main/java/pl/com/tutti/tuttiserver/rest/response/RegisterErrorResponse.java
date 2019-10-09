@@ -1,4 +1,4 @@
-package pl.com.tutti.tuttiserver.rest.response.error;
+package pl.com.tutti.tuttiserver.rest.response;
 
 import pl.com.tutti.tuttiserver.rest.response.BasicResponse;
 

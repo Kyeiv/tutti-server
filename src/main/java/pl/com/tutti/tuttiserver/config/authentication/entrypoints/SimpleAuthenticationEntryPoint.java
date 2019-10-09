@@ -1,4 +1,4 @@
-package pl.com.tutti.tuttiserver.rest.authentication;
+package pl.com.tutti.tuttiserver.config.authentication.entrypoints;
 
 import java.io.IOException;
 
