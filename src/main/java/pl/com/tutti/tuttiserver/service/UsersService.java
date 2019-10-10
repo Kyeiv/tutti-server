@@ -1,5 +1,7 @@
 package pl.com.tutti.tuttiserver.service;
 
+import org.apache.catalina.User;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.com.tutti.tuttiserver.entity.Users;
 import pl.com.tutti.tuttiserver.repository.UsersRepository;
@@ -20,4 +22,12 @@ public class UsersService {
     }
 
     public List<Users> findAll() {return usersRepository.findAll();}
+
+    public Users findByUsername(String username) {
+        Users user = usersRepository.findByUsername(username);
+        if(user == null)
+            throw new UsernameNotFoundException("No username found!");
+
+        return user;
+    }
 }

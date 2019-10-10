@@ -13,6 +13,7 @@ import pl.com.tutti.tuttiserver.rest.response.RegisterResponse;
 import pl.com.tutti.tuttiserver.service.UsersService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,12 @@ public class AuthenticationRestController {
 	@GetMapping("/login")
 	public String login(){
 		return "Hello!";
+	}
+
+	@GetMapping("/whoami")
+	public Principal getPrincipal(Principal principal) {
+
+		return principal;
 	}
 
 	@PostMapping("/registration")
@@ -55,7 +62,7 @@ public class AuthenticationRestController {
 				.phone(registrationForm.getPhone())
 				.build();
 
-		registered.setUserdDetailId(userDetails);
+		registered.setUserdDetails(userDetails);
 
 		usersService.save(registered);
 

@@ -26,7 +26,7 @@ public class Users {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_details_id")
-    private UserDetails userdDetailId;
+    private UserDetails userdDetails;
 
     @OneToMany(mappedBy = "tutor")
     private List<Appointments> appointmentsAsTutor;
