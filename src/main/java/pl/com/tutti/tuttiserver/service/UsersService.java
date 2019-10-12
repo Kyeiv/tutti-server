@@ -30,4 +30,9 @@ public class UsersService {
 
         return user;
     }
+
+    public  Users getWithSpecializations(Users user) {
+        user.getSpecializations();
+        return user;
+    }
 }

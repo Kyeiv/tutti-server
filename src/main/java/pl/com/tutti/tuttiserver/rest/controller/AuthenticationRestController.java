@@ -62,7 +62,7 @@ public class AuthenticationRestController {
 				.phone(registrationForm.getPhone())
 				.build();
 
-		registered.setUserdDetails(userDetails);
+		registered.setUserDetails(userDetails);
 
 		usersService.save(registered);
 

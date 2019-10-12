@@ -36,4 +36,6 @@ public class Specializations {
     private Integer likes;
 
     private Integer dislikes;
+
+    private Float salary;
 }

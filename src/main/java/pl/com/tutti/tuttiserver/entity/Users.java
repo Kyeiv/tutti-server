@@ -26,7 +26,7 @@ public class Users {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_details_id")
-    private UserDetails userdDetails;
+    private UserDetails userDetails;
 
     @OneToMany(mappedBy = "tutor")
     private List<Appointments> appointmentsAsTutor;
@@ -45,4 +45,9 @@ public class Users {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
     private List<Posts> posts;
+
+    public void addSpecialization(Specializations specialization) {
+        this.specializations.add(specialization);
+        specialization.setUsername(this);
+    }
 }
