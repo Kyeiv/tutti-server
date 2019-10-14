@@ -38,18 +38,13 @@ public class Users {
     private List<Specialization> specializations;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
-    private List<Availbility> availbility;
+    private List<Availbility> availbilities;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "authoritiesPK.username")
     private List<Authorities> authorities;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
     private List<Post> posts;
-
-    public void addSpecialization(Specialization specialization) {
-        this.specializations.add(specialization);
-        specialization.setUsername(this);
-    }
 
     public void appointmentAsTutor(Appointment appointment) {
         this.appointmentsAsTutor.add(appointment);
@@ -59,5 +54,24 @@ public class Users {
     public void appointmentAsStudent(Appointment appointment) {
         this.appointmentsAsStudent.add(appointment);
         appointment.setStudent(this);
+    }
+
+    public void addSpecialization(Specialization specialization) {
+        this.specializations.add(specialization);
+        specialization.setUsername(this);
+    }
+
+    public void addAvailbility(Availbility availbility) {
+        this.availbilities.add(availbility);
+        availbility.setUsername(this);
+    }
+
+    public void addAuthority(Authorities authority) {
+        this.authorities.add(authority);
+    }
+
+    public void addPost(Post post) {
+        this.posts.add(post);
+        post.setUsername(this);
     }
 }
