@@ -1,21 +1,17 @@
 package pl.com.tutti.tuttiserver.service;
 
-import org.apache.catalina.User;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.com.tutti.tuttiserver.entity.Users;
 import pl.com.tutti.tuttiserver.repository.UsersRepository;
 
-import javax.validation.constraints.Max;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class UsersService {
     private final UsersRepository usersRepository;
-
-    public UsersService(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
-    }
 
     public void save (Users user) {
         usersRepository.save(user);

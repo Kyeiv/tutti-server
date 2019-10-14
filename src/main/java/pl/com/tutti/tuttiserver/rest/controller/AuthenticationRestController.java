@@ -1,5 +1,6 @@
 package pl.com.tutti.tuttiserver.rest.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,19 +20,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
+@AllArgsConstructor
 public class AuthenticationRestController {
 
-	@Autowired
 	private UsersService usersService;
-	
-	@GetMapping("/login")
-	public String login(){
-		return "Hello!";
-	}
 
 	@GetMapping("/whoami")
 	public Principal getPrincipal(Principal principal) {
-
 		return principal;
 	}
 

@@ -25,11 +25,4 @@ public class UsersRestController {
 	public List<Users> findAll(){
 		return usersService.findAll();
 	}
-	
-	@GetMapping("/hello")
-	public String sayHello(Principal principal) {
-		
-		return principal.getName();
-	}
-
 }
