@@ -1,7 +1,7 @@
 package pl.com.tutti.tuttiserver.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.com.tutti.tuttiserver.entity.Posts;
+import pl.com.tutti.tuttiserver.entity.Post;
 
-public interface PostsRepository extends JpaRepository<Posts, Integer> {
+public interface PostsRepository extends JpaRepository<Post, Integer> {
 }

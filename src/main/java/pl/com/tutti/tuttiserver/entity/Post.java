@@ -11,7 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
 
 @Entity
 @Setter
@@ -19,7 +21,7 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Specializations {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,13 +31,10 @@ public class Specializations {
     @JoinColumn(name = "username")
     private Users username;
 
-    private String level;
+    private String title;
 
-    private String name;
+    @Lob
+    private String content;
 
-    private Integer likes;
-
-    private Integer dislikes;
-
-    private Float salary;
+    private LocalDateTime createdAt;
 }

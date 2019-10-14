@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
@@ -21,20 +20,23 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Posts {
+public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private LocalDateTime scheduledDatetime;
+
+    private Integer durationMinutes;
+
+    private String state;
+
     @ManyToOne
-    @JoinColumn(name = "username")
-    private Users username;
+    @JoinColumn(name = "tutor")
+    private Users tutor;
 
-    private String title;
-
-    @Lob
-    private String content;
-
-    private LocalDateTime createdAt;
+    @ManyToOne
+    @JoinColumn(name = "student")
+    private Users student;
 }

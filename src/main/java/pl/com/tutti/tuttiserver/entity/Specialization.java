@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.time.LocalDateTime;
 
 @Entity
 @Setter
@@ -20,23 +19,23 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Appointments {
+public class Specialization {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private LocalDateTime scheduledDatetime;
-
-    private Integer durationMinutes;
-
-    private String state;
-
     @ManyToOne
-    @JoinColumn(name = "tutor")
-    private Users tutor;
+    @JoinColumn(name = "username")
+    private Users username;
 
-    @ManyToOne
-    @JoinColumn(name = "student")
-    private Users student;
+    private String level;
+
+    private String name;
+
+    private Integer likes;
+
+    private Integer dislikes;
+
+    private Float salary;
 }

@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="04c9a534-4738-42b7-b6d3-88aa65d83539" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/controller/AuthenticationRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/controller/AuthenticationRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/controller/UsersRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/controller/UsersRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/AppointmentsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/AppointmentsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/AuthoritiesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/AuthoritiesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/AvailbilityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/AvailbilityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/PostsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/PostsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/SpecializationsSerice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/SpecializationsSerice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/UserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/UserDetailsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/UsersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/UsersService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Appointments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Appointment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Posts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Specializations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Specialization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/repository/AppointmentsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/repository/AppointmentsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/repository/PostsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/repository/PostsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/repository/SpecializationsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/repository/SpecializationsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/controller/SpecializationRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/controller/SpecializationRestController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -28,6 +27,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Users.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="817">
+              <caret line="60" column="31" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/controller/AuthenticationRestController.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -44,8 +55,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/controller/SpecializationRestController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="44" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="44" />
+            <state relative-caret-position="391">
+              <caret line="23" column="43" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -65,7 +76,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/controller/UsersRestController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
@@ -78,10 +89,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/AvailbilityService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/UserDetails.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="476">
+              <caret line="28" column="27" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -90,10 +101,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/PostsService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Specialization.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="357">
+              <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -102,10 +113,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/SpecializationsSerice.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Post.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="391">
+              <caret line="23" column="17" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -114,10 +125,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/UserDetailsService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Appointment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="33" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
+            <state relative-caret-position="680">
+              <caret line="40" column="26" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -129,19 +143,6 @@
               <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/5.1.5.RELEASE/spring-security-core-5.1.5.RELEASE-sources.jar!/org/springframework/security/core/userdetails/UsernameNotFoundException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="35" column="11" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
-              <folding>
-                <element signature="e#1264#1265#0" expanded="true" />
-                <element signature="e#1281#1282#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -171,9 +172,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/Availbility.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/Posts.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/Specializations.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/UserDetails.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/Users.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/repository/AppointmentsRepository.java" />
@@ -206,8 +204,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/repository/UsersRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/repository/UserDetailsRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Specializations.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Users.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/response/UserDetailsResponse.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/controller/SpecializationRestController.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/request/RegistrationForm.java" />
@@ -222,6 +218,11 @@
         <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/service/UsersService.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/controller/AuthenticationRestController.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/controller/UsersRestController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Specializations.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Specialization.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Post.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Appointment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Users.java" />
       </list>
     </option>
   </component>
@@ -613,13 +614,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49344000" />
+    <option name="totallyTimeSpent" value="49724000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1634" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14104193" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21918678" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -830,36 +831,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/UserDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="28" column="27" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Specializations.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="29" column="27" lean-forward="true" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Posts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Availbility.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="585">
@@ -880,27 +851,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Appointments.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="40" column="26" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/security/Principal.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Users.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="42" column="68" selection-start-line="42" selection-start-column="68" selection-end-line="42" selection-end-column="68" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/response/RegisterResponse.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -1026,8 +977,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/rest/controller/SpecializationRestController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="44" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="44" />
+        <state relative-caret-position="391">
+          <caret line="23" column="43" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1048,6 +999,56 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/UserDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="27" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Specialization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Post.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="17" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Appointment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="40" column="26" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/com/tutti/tuttiserver/entity/Users.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="817">
+          <caret line="60" column="31" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

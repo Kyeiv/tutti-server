@@ -29,13 +29,13 @@ public class Users {
     private UserDetails userDetails;
 
     @OneToMany(mappedBy = "tutor")
-    private List<Appointments> appointmentsAsTutor;
+    private List<Appointment> appointmentsAsTutor;
 
     @OneToMany(mappedBy = "student")
-    private List<Appointments> appointmentsAsStudent;
+    private List<Appointment> appointmentsAsStudent;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
-    private List<Specializations> specializations;
+    private List<Specialization> specializations;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
     private List<Availbility> availbility;
@@ -44,10 +44,20 @@ public class Users {
     private List<Authorities> authorities;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
-    private List<Posts> posts;
+    private List<Post> posts;
 
-    public void addSpecialization(Specializations specialization) {
+    public void addSpecialization(Specialization specialization) {
         this.specializations.add(specialization);
         specialization.setUsername(this);
+    }
+
+    public void appointmentAsTutor(Appointment appointment) {
+        this.appointmentsAsTutor.add(appointment);
+        appointment.setTutor(this);
+    }
+
+    public void appointmentAsStudent(Appointment appointment) {
+        this.appointmentsAsStudent.add(appointment);
+        appointment.setStudent(this);
     }
 }
