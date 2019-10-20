@@ -31,4 +31,9 @@ public class UsersService {
         user.getSpecializations();
         return user;
     }
+
+    public Users getWithAvailbilities(Users user) {
+        user.getAvailbilities();
+        return user;
+    }
 }

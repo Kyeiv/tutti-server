@@ -35,4 +35,6 @@ public class Availbility {
     @ManyToOne
     @JoinColumn(name = "username")
     private Users username;
+
+    private Integer dayOfTheWeek;
 }
