@@ -36,4 +36,9 @@ public class UsersService {
         user.getAvailbilities();
         return user;
     }
+
+    public Users getWithPosts(Users user) {
+        user.getPosts();
+        return user;
+    }
 }
