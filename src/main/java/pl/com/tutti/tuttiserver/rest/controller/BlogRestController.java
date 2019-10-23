@@ -16,6 +16,7 @@ import pl.com.tutti.tuttiserver.service.UsersService;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +27,10 @@ public class BlogRestController {
     private final PostsService postsService;
     private final UsersService usersService;
 
-    @GetMapping("/posts")
-    ResponseEntity getPosts(Principal principal){
+    @GetMapping("/posts/{username}")
+    ResponseEntity getPosts(@PathVariable("username") String username){
 
-        Users user = usersService.findByUsername(principal.getName());
+        Users user = usersService.findByUsername(username);
         user = usersService.getWithPosts(user);
 
         List<Post> posts = user.getPosts();
@@ -101,7 +102,7 @@ public class BlogRestController {
         Post post = new Post();
         post.setUsername(user);
         post.setContent(postRequest.getContent());
-        post.setCreatedAt(postRequest.getCreatedAt());
+        post.setCreatedAt(LocalDateTime.now());
         post.setTitle(postRequest.getTitle());
 
         user = usersService.getWithPosts(user);
@@ -118,5 +119,27 @@ public class BlogRestController {
         postResponse.setElementId(post.getId());
 
         return new ResponseEntity<>(postResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/post/{id}")
+    @ResponseBody
+    public ResponseEntity getPost(@PathVariable("id") Integer id, Principal principal) {
+        Post post = postsService.findById(id);
+        if(!post.getUsername().getUsername().equals(principal.getName()))
+            throw new UnauthorizedException("No rights to get this entry!");
+
+        PostRequest postRequest = new PostRequest();
+        postRequest.setId(post.getId());
+        postRequest.setContent(post.getContent());
+        postRequest.setTitle(post.getTitle());
+        postRequest.setCreatedAt(post.getCreatedAt());
+
+        PostBodyResponse postBodyResponse = new PostBodyResponse();
+        postBodyResponse.setMessage("getPost");
+        postBodyResponse.setStatus(HttpStatus.OK.value());
+        postBodyResponse.setTimeStamp(System.currentTimeMillis());
+        postBodyResponse.setPostRequest(postRequest);
+
+        return new ResponseEntity<>(postBodyResponse, HttpStatus.OK);
     }
 }
