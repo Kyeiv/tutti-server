@@ -9,7 +9,7 @@ import pl.com.tutti.tuttiserver.entity.Users;
 import pl.com.tutti.tuttiserver.rest.exception.PostExistsException;
 import pl.com.tutti.tuttiserver.rest.exception.PostNotExistsException;
 import pl.com.tutti.tuttiserver.rest.exception.UnauthorizedException;
-import pl.com.tutti.tuttiserver.rest.request.PostRequest;
+import pl.com.tutti.tuttiserver.rest.data.PostData;
 import pl.com.tutti.tuttiserver.rest.response.*;
 import pl.com.tutti.tuttiserver.service.PostsService;
 import pl.com.tutti.tuttiserver.service.UsersService;
@@ -49,25 +49,25 @@ public class BlogRestController {
     }
 
     @PostMapping("/posts")
-    public ResponseEntity addPost(@Valid @RequestBody PostRequest postRequest, Principal principal){
-        if(postRequest.getId() != null)
+    public ResponseEntity addPost(@Valid @RequestBody PostData postData, Principal principal){
+        if(postData.getId() != null)
             throw new PostExistsException("To update existing use PATCH!");
 
-        return getResponseEntity(postRequest, principal);
+        return getResponseEntity(postData, principal);
     }
 
     @PatchMapping("/posts")
-    public ResponseEntity updatePost(@Valid @RequestBody PostRequest postRequest, Principal principal) {
-        if(postRequest.getId() == null)
+    public ResponseEntity updatePost(@Valid @RequestBody PostData postData, Principal principal) {
+        if(postData.getId() == null)
             throw new PostNotExistsException("To save new use POST!");
 
-        Post post = postsService.findById(postRequest.getId());
+        Post post = postsService.findById(postData.getId());
         if(!post.getUsername().getUsername().equals(principal.getName()))
             throw new UnauthorizedException("No rights to patch this entry!");
 
-        post.setContent(postRequest.getContent());
-        post.setCreatedAt(postRequest.getCreatedAt());
-        post.setTitle(postRequest.getTitle());
+        post.setContent(postData.getContent());
+        post.setCreatedAt(postData.getCreatedAt());
+        post.setTitle(postData.getTitle());
 
         postsService.save(post);
 
@@ -96,14 +96,14 @@ public class BlogRestController {
         return new ResponseEntity<>(basicResponse, HttpStatus.OK);
     }
 
-    private ResponseEntity getResponseEntity(@RequestBody @Valid PostRequest postRequest, Principal principal) {
+    private ResponseEntity getResponseEntity(@RequestBody @Valid PostData postData, Principal principal) {
         Users user = usersService.findByUsername(principal.getName());
 
         Post post = new Post();
         post.setUsername(user);
-        post.setContent(postRequest.getContent());
+        post.setContent(postData.getContent());
         post.setCreatedAt(LocalDateTime.now());
-        post.setTitle(postRequest.getTitle());
+        post.setTitle(postData.getTitle());
 
         user = usersService.getWithPosts(user);
         if(user.getPosts() == null)
@@ -112,13 +112,13 @@ public class BlogRestController {
 
         postsService.save(post);
 
-        PostResponse postResponse = new PostResponse();
-        postResponse.setMessage("addPost");
-        postResponse.setStatus(HttpStatus.OK.value());
-        postResponse.setTimeStamp(System.currentTimeMillis());
-        postResponse.setElementId(post.getId());
+        ElementIdResponse elementIdResponse = new ElementIdResponse();
+        elementIdResponse.setMessage("addPost");
+        elementIdResponse.setStatus(HttpStatus.OK.value());
+        elementIdResponse.setTimeStamp(System.currentTimeMillis());
+        elementIdResponse.setElementId(post.getId());
 
-        return new ResponseEntity<>(postResponse, HttpStatus.OK);
+        return new ResponseEntity<>(elementIdResponse, HttpStatus.OK);
     }
 
     @GetMapping("/post/{id}")
@@ -128,18 +128,18 @@ public class BlogRestController {
         if(!post.getUsername().getUsername().equals(principal.getName()))
             throw new UnauthorizedException("No rights to get this entry!");
 
-        PostRequest postRequest = new PostRequest();
-        postRequest.setId(post.getId());
-        postRequest.setContent(post.getContent());
-        postRequest.setTitle(post.getTitle());
-        postRequest.setCreatedAt(post.getCreatedAt());
+        PostData postData = new PostData();
+        postData.setId(post.getId());
+        postData.setContent(post.getContent());
+        postData.setTitle(post.getTitle());
+        postData.setCreatedAt(post.getCreatedAt());
 
-        PostBodyResponse postBodyResponse = new PostBodyResponse();
-        postBodyResponse.setMessage("getPost");
-        postBodyResponse.setStatus(HttpStatus.OK.value());
-        postBodyResponse.setTimeStamp(System.currentTimeMillis());
-        postBodyResponse.setPostRequest(postRequest);
+        PostDataResponse postDataResponse = new PostDataResponse();
+        postDataResponse.setMessage("getPost");
+        postDataResponse.setStatus(HttpStatus.OK.value());
+        postDataResponse.setTimeStamp(System.currentTimeMillis());
+        postDataResponse.setPostData(postData);
 
-        return new ResponseEntity<>(postBodyResponse, HttpStatus.OK);
+        return new ResponseEntity<>(postDataResponse, HttpStatus.OK);
     }
 }

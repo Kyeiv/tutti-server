@@ -1,4 +1,4 @@
-package pl.com.tutti.tuttiserver.rest.request;
+package pl.com.tutti.tuttiserver.rest.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
 
 @Setter
 @Getter

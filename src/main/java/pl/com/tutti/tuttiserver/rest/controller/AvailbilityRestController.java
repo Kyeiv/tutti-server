@@ -9,10 +9,10 @@ import pl.com.tutti.tuttiserver.entity.Users;
 import pl.com.tutti.tuttiserver.rest.exception.AvailbilityExistsException;
 import pl.com.tutti.tuttiserver.rest.exception.AvailbilityNotExistsException;
 import pl.com.tutti.tuttiserver.rest.exception.UnauthorizedException;
-import pl.com.tutti.tuttiserver.rest.request.AvailbilityRequest;
+import pl.com.tutti.tuttiserver.rest.data.AvailbilityData;
 import pl.com.tutti.tuttiserver.rest.response.AvailbilitiesResponse;
-import pl.com.tutti.tuttiserver.rest.response.AvailbilityResponse;
 import pl.com.tutti.tuttiserver.rest.response.BasicResponse;
+import pl.com.tutti.tuttiserver.rest.response.ElementIdResponse;
 import pl.com.tutti.tuttiserver.service.AvailbilityService;
 import pl.com.tutti.tuttiserver.service.UsersService;
 
@@ -51,25 +51,25 @@ public class AvailbilityRestController {
     }
 
     @PostMapping("/availbilities")
-    public ResponseEntity addAvailbility(@Valid @RequestBody AvailbilityRequest availbilityRequest, Principal principal){
-        if(availbilityRequest.getId() != null)
+    public ResponseEntity addAvailbility(@Valid @RequestBody AvailbilityData availbilityData, Principal principal){
+        if(availbilityData.getId() != null)
             throw new AvailbilityExistsException("To update existing use PATCH!");
 
-        return getResponseEntity(availbilityRequest, principal);
+        return getResponseEntity(availbilityData, principal);
     }
 
     @PatchMapping("/availbilities")
-    public ResponseEntity updateAvailbility(@Valid @RequestBody AvailbilityRequest availbilityRequest, Principal principal) {
-        if(availbilityRequest.getId() == null)
+    public ResponseEntity updateAvailbility(@Valid @RequestBody AvailbilityData availbilityData, Principal principal) {
+        if(availbilityData.getId() == null)
             throw new AvailbilityNotExistsException("To save new use POST!");
 
-        Availbility availbility = availbilityService.findById(availbilityRequest.getId());
+        Availbility availbility = availbilityService.findById(availbilityData.getId());
         if(!availbility.getUsername().getUsername().equals(principal.getName()))
             throw new UnauthorizedException("No rights to patch this entry!");
 
-        availbility.setDayOfTheWeek(availbilityRequest.getDayOfTheWeek());
-        availbility.setHourBegin(availbilityRequest.getHourBegin());
-        availbility.setHourEnd(availbilityRequest.getHourEnd());
+        availbility.setDayOfTheWeek(availbilityData.getDayOfTheWeek());
+        availbility.setHourBegin(availbilityData.getHourBegin());
+        availbility.setHourEnd(availbilityData.getHourEnd());
 
         availbilityService.save(availbility);
 
@@ -98,14 +98,14 @@ public class AvailbilityRestController {
         return new ResponseEntity<>(basicResponse, HttpStatus.OK);
     }
 
-    private ResponseEntity getResponseEntity(@RequestBody @Valid AvailbilityRequest availbilityRequest, Principal principal) {
+    private ResponseEntity getResponseEntity(@RequestBody @Valid AvailbilityData availbilityData, Principal principal) {
         Users user = usersService.findByUsername(principal.getName());
 
         Availbility availbility = new Availbility();
         availbility.setUsername(user);
-        availbility.setDayOfTheWeek(availbilityRequest.getDayOfTheWeek());
-        availbility.setHourBegin(availbilityRequest.getHourBegin());
-        availbility.setHourEnd(availbilityRequest.getHourEnd());
+        availbility.setDayOfTheWeek(availbilityData.getDayOfTheWeek());
+        availbility.setHourBegin(availbilityData.getHourBegin());
+        availbility.setHourEnd(availbilityData.getHourEnd());
 
         user = usersService.getWithAvailbilities(user);
         if(user.getAvailbilities() == null)
@@ -114,12 +114,12 @@ public class AvailbilityRestController {
 
         availbilityService.save(availbility);
 
-        AvailbilityResponse availbilityResponse = new AvailbilityResponse();
-        availbilityResponse.setMessage("addAvailbility");
-        availbilityResponse.setStatus(HttpStatus.OK.value());
-        availbilityResponse.setTimeStamp(System.currentTimeMillis());
-        availbilityResponse.setElementId(availbility.getId());
+        ElementIdResponse elementIdResponse = new ElementIdResponse();
+        elementIdResponse.setMessage("addAvailbility");
+        elementIdResponse.setStatus(HttpStatus.OK.value());
+        elementIdResponse.setTimeStamp(System.currentTimeMillis());
+        elementIdResponse.setElementId(availbility.getId());
 
-        return new ResponseEntity<>(availbilityResponse, HttpStatus.OK);
+        return new ResponseEntity<>(elementIdResponse, HttpStatus.OK);
     }
 }

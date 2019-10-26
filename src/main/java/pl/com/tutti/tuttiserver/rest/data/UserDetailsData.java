@@ -1,4 +1,4 @@
-package pl.com.tutti.tuttiserver.rest.request;
+package pl.com.tutti.tuttiserver.rest.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDetailsRequest {
+public class UserDetailsData {
     private String city;
     private String country;
     private String mail;

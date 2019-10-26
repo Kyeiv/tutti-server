@@ -1,4 +1,4 @@
-package pl.com.tutti.tuttiserver.rest.request;
+package pl.com.tutti.tuttiserver.rest.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostRequest {
+public class PostData {
     private Integer id;
     private String title;
     private String content;

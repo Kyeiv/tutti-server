@@ -1,4 +1,4 @@
-package pl.com.tutti.tuttiserver.rest.request;
+package pl.com.tutti.tuttiserver.rest.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SpecializationRequest {
+public class SpecializationData {
     private Integer likes;
     private Integer dislikes;
     private String level;

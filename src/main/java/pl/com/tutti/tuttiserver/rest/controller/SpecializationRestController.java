@@ -9,9 +9,9 @@ import pl.com.tutti.tuttiserver.entity.Users;
 import pl.com.tutti.tuttiserver.rest.exception.SpecializationExistsException;
 import pl.com.tutti.tuttiserver.rest.exception.SpecializationNotExistsException;
 import pl.com.tutti.tuttiserver.rest.exception.UnauthorizedException;
-import pl.com.tutti.tuttiserver.rest.request.SpecializationRequest;
+import pl.com.tutti.tuttiserver.rest.data.SpecializationData;
 import pl.com.tutti.tuttiserver.rest.response.BasicResponse;
-import pl.com.tutti.tuttiserver.rest.response.SpecializationResponse;
+import pl.com.tutti.tuttiserver.rest.response.ElementIdResponse;
 import pl.com.tutti.tuttiserver.rest.response.SpecializationsResponse;
 import pl.com.tutti.tuttiserver.service.SpecializationsService;
 import pl.com.tutti.tuttiserver.service.UsersService;
@@ -51,27 +51,27 @@ public class SpecializationRestController {
     }
 
     @PostMapping("/specializations")
-    public ResponseEntity addSpecialization(@Valid @RequestBody SpecializationRequest specializationRequest, Principal principal){
-        if(specializationRequest.getId() != null)
+    public ResponseEntity addSpecialization(@Valid @RequestBody SpecializationData specializationData, Principal principal){
+        if(specializationData.getId() != null)
             throw new SpecializationExistsException("To update existing use PATCH!");
 
-        return getResponseEntity(specializationRequest, principal);
+        return getResponseEntity(specializationData, principal);
     }
 
     @PatchMapping("/specializations")
-    public ResponseEntity updateSpecialization(@Valid @RequestBody SpecializationRequest specializationRequest, Principal principal) {
-        if(specializationRequest.getId() == null)
+    public ResponseEntity updateSpecialization(@Valid @RequestBody SpecializationData specializationData, Principal principal) {
+        if(specializationData.getId() == null)
             throw new SpecializationNotExistsException("To save new use POST!");
 
-        Specialization specialization = specializationsService.findById(specializationRequest.getId());
+        Specialization specialization = specializationsService.findById(specializationData.getId());
         if(!specialization.getUsername().getUsername().equals(principal.getName()))
             throw new UnauthorizedException("No rights to patch this entry!");
 
-        specialization.setDislikes(specializationRequest.getDislikes());
-        specialization.setLikes(specializationRequest.getLikes());
-        specialization.setLevel(specializationRequest.getLevel());
-        specialization.setName(specializationRequest.getName());
-        specialization.setSalary(specializationRequest.getSalary());
+        specialization.setDislikes(specializationData.getDislikes());
+        specialization.setLikes(specializationData.getLikes());
+        specialization.setLevel(specializationData.getLevel());
+        specialization.setName(specializationData.getName());
+        specialization.setSalary(specializationData.getSalary());
 
         specializationsService.save(specialization);
 
@@ -100,17 +100,17 @@ public class SpecializationRestController {
         return new ResponseEntity<>(basicResponse, HttpStatus.OK);
     }
 
-    private ResponseEntity getResponseEntity(@RequestBody @Valid SpecializationRequest specializationRequest, Principal principal) {
+    private ResponseEntity getResponseEntity(@RequestBody @Valid SpecializationData specializationData, Principal principal) {
         Users user = usersService.findByUsername(principal.getName());
 
         Specialization specialization = new Specialization();
         specialization.setUsername(user);
-        specialization.setDislikes(specializationRequest.getDislikes());
-        specialization.setLikes(specializationRequest.getLikes());
-        specialization.setLevel(specializationRequest.getLevel());
-        specialization.setName(specializationRequest.getName());
-        specialization.setSalary(specializationRequest.getSalary());
-        specialization.setId(specializationRequest.getId());
+        specialization.setDislikes(specializationData.getDislikes());
+        specialization.setLikes(specializationData.getLikes());
+        specialization.setLevel(specializationData.getLevel());
+        specialization.setName(specializationData.getName());
+        specialization.setSalary(specializationData.getSalary());
+        specialization.setId(specializationData.getId());
 
         user = usersService.getWithSpecializations(user);
         if(user.getSpecializations() == null)
@@ -119,12 +119,12 @@ public class SpecializationRestController {
 
         specializationsService.save(specialization);
 
-        SpecializationResponse specializationResponse = new SpecializationResponse();
-        specializationResponse.setMessage("addSpecialization");
-        specializationResponse.setStatus(HttpStatus.OK.value());
-        specializationResponse.setTimeStamp(System.currentTimeMillis());
-        specializationResponse.setElementId(specialization.getId());
+        ElementIdResponse elementIdResponse = new ElementIdResponse();
+        elementIdResponse.setMessage("addSpecialization");
+        elementIdResponse.setStatus(HttpStatus.OK.value());
+        elementIdResponse.setTimeStamp(System.currentTimeMillis());
+        elementIdResponse.setElementId(specialization.getId());
 
-        return new ResponseEntity<>(specializationResponse, HttpStatus.OK);
+        return new ResponseEntity<>(elementIdResponse, HttpStatus.OK);
     }
 }

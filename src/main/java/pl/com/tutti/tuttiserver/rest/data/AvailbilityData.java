@@ -1,4 +1,4 @@
-package pl.com.tutti.tuttiserver.rest.request;
+package pl.com.tutti.tuttiserver.rest.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.time.LocalTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AvailbilityRequest {
+public class AvailbilityData {
     LocalTime hourBegin;
     LocalTime hourEnd;
     Integer id;

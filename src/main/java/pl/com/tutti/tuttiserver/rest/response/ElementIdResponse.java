@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SpecializationResponse extends BasicResponse{
+public class ElementIdResponse extends BasicResponse {
     private Integer elementId;
 }

@@ -3,18 +3,14 @@ package pl.com.tutti.tuttiserver.rest.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pl.com.tutti.tuttiserver.entity.UserDetails;
 import pl.com.tutti.tuttiserver.entity.Users;
-import pl.com.tutti.tuttiserver.rest.request.RegistrationForm;
-import pl.com.tutti.tuttiserver.rest.request.UserDetailsRequest;
+import pl.com.tutti.tuttiserver.rest.data.UserDetailsData;
 import pl.com.tutti.tuttiserver.rest.response.BasicResponse;
 import pl.com.tutti.tuttiserver.rest.response.UserDetailsResponse;
 import pl.com.tutti.tuttiserver.service.UserDetailsService;
 import pl.com.tutti.tuttiserver.service.UsersService;
-
-import org.springframework.security.core.userdetails.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -41,16 +37,16 @@ public class UserDetailsRestController {
     }
 
     @PutMapping("/user-details")
-    public ResponseEntity setUserDetails(@Valid @RequestBody UserDetailsRequest userDetailsRequest, Principal principal){
+    public ResponseEntity setUserDetails(@Valid @RequestBody UserDetailsData userDetailsData, Principal principal){
         Users user = usersService.findByUsername(principal.getName());
         UserDetails userDetails = user.getUserDetails();
 
-        userDetails.setCity(userDetailsRequest.getCity());
-        userDetails.setCountry(userDetailsRequest.getCountry());
-        userDetails.setMail(userDetailsRequest.getMail());
-        userDetails.setSurname(userDetailsRequest.getSurname());
-        userDetails.setName(userDetailsRequest.getName());
-        userDetails.setPhone(userDetailsRequest.getPhone());
+        userDetails.setCity(userDetailsData.getCity());
+        userDetails.setCountry(userDetailsData.getCountry());
+        userDetails.setMail(userDetailsData.getMail());
+        userDetails.setSurname(userDetailsData.getSurname());
+        userDetails.setName(userDetailsData.getName());
+        userDetails.setPhone(userDetailsData.getPhone());
 
         usersService.save(user);
 
