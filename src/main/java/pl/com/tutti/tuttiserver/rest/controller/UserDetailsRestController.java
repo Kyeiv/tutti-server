@@ -1,14 +1,12 @@
 package pl.com.tutti.tuttiserver.rest.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.com.tutti.tuttiserver.entity.UserDetails;
 import pl.com.tutti.tuttiserver.entity.Users;
+import pl.com.tutti.tuttiserver.rest.controller.utils.ResponseFactory;
 import pl.com.tutti.tuttiserver.rest.data.UserDetailsData;
-import pl.com.tutti.tuttiserver.rest.response.BasicResponse;
-import pl.com.tutti.tuttiserver.rest.response.UserDetailsResponse;
 import pl.com.tutti.tuttiserver.service.UserDetailsService;
 import pl.com.tutti.tuttiserver.service.UsersService;
 
@@ -27,13 +25,7 @@ public class UserDetailsRestController {
     public ResponseEntity getUserDetails(Principal principal){
         Users user = usersService.findByUsername(principal.getName());
 
-        UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
-        userDetailsResponse.setMessage("getUserDetails");
-        userDetailsResponse.setStatus(HttpStatus.OK.value());
-        userDetailsResponse.setTimeStamp(System.currentTimeMillis());
-        userDetailsResponse.setUserDetails(user.getUserDetails());
-
-        return new ResponseEntity<>(userDetailsResponse, HttpStatus.OK);
+        return ResponseFactory.createPayloadResponse(user.getUserDetails(), "getUserDetails");
     }
 
     @PutMapping("/user-details")
@@ -50,11 +42,6 @@ public class UserDetailsRestController {
 
         usersService.save(user);
 
-        BasicResponse basicResponse = new BasicResponse();
-        basicResponse.setMessage("setUserDetails");
-        basicResponse.setStatus(HttpStatus.OK.value());
-        basicResponse.setTimeStamp(System.currentTimeMillis());
-
-        return new ResponseEntity<>(basicResponse, HttpStatus.OK);
+        return ResponseFactory.createBasicResponse("setUserDetails");
     }
 }

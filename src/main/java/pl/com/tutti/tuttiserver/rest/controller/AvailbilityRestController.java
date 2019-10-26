@@ -1,18 +1,15 @@
 package pl.com.tutti.tuttiserver.rest.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.com.tutti.tuttiserver.entity.Availbility;
 import pl.com.tutti.tuttiserver.entity.Users;
+import pl.com.tutti.tuttiserver.rest.controller.utils.ResponseFactory;
 import pl.com.tutti.tuttiserver.rest.exception.AvailbilityExistsException;
 import pl.com.tutti.tuttiserver.rest.exception.AvailbilityNotExistsException;
 import pl.com.tutti.tuttiserver.rest.exception.UnauthorizedException;
 import pl.com.tutti.tuttiserver.rest.data.AvailbilityData;
-import pl.com.tutti.tuttiserver.rest.response.AvailbilitiesResponse;
-import pl.com.tutti.tuttiserver.rest.response.BasicResponse;
-import pl.com.tutti.tuttiserver.rest.response.ElementIdResponse;
 import pl.com.tutti.tuttiserver.service.AvailbilityService;
 import pl.com.tutti.tuttiserver.service.UsersService;
 
@@ -41,13 +38,7 @@ public class AvailbilityRestController {
         else
             availbilities.stream().forEach(spec -> spec.setUsername(null));
 
-        AvailbilitiesResponse availbilitiesResponse = new AvailbilitiesResponse();
-        availbilitiesResponse.setMessage("getAvailbilities");
-        availbilitiesResponse.setStatus(HttpStatus.OK.value());
-        availbilitiesResponse.setTimeStamp(System.currentTimeMillis());
-        availbilitiesResponse.setAvailbilities(availbilities);
-
-        return new ResponseEntity<>(availbilitiesResponse, HttpStatus.OK);
+        return ResponseFactory.createPayloadResponse(availbilities, "getAvailbilities");
     }
 
     @PostMapping("/availbilities")
@@ -73,12 +64,7 @@ public class AvailbilityRestController {
 
         availbilityService.save(availbility);
 
-        BasicResponse basicResponse = new BasicResponse();
-        basicResponse.setMessage("updateAvailbility");
-        basicResponse.setStatus(HttpStatus.OK.value());
-        basicResponse.setTimeStamp(System.currentTimeMillis());
-
-        return new ResponseEntity<>(basicResponse, HttpStatus.OK);
+        return ResponseFactory.createBasicResponse("updateAvailbility");
     }
 
     @DeleteMapping("/availbilities/{id}")
@@ -90,12 +76,7 @@ public class AvailbilityRestController {
 
         availbilityService.delete(availbility);
 
-        BasicResponse basicResponse = new BasicResponse();
-        basicResponse.setMessage("deleteAvailbility");
-        basicResponse.setStatus(HttpStatus.OK.value());
-        basicResponse.setTimeStamp(System.currentTimeMillis());
-
-        return new ResponseEntity<>(basicResponse, HttpStatus.OK);
+       return ResponseFactory.createBasicResponse("deleteAvailbility");
     }
 
     private ResponseEntity getResponseEntity(@RequestBody @Valid AvailbilityData availbilityData, Principal principal) {
@@ -114,12 +95,6 @@ public class AvailbilityRestController {
 
         availbilityService.save(availbility);
 
-        ElementIdResponse elementIdResponse = new ElementIdResponse();
-        elementIdResponse.setMessage("addAvailbility");
-        elementIdResponse.setStatus(HttpStatus.OK.value());
-        elementIdResponse.setTimeStamp(System.currentTimeMillis());
-        elementIdResponse.setElementId(availbility.getId());
-
-        return new ResponseEntity<>(elementIdResponse, HttpStatus.OK);
+        return ResponseFactory.createPayloadResponse(availbility.getId(), "addAvailbility");
     }
 }

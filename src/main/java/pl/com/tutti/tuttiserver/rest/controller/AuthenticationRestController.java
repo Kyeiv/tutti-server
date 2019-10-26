@@ -1,15 +1,14 @@
 package pl.com.tutti.tuttiserver.rest.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.com.tutti.tuttiserver.entity.Authorities;
 import pl.com.tutti.tuttiserver.entity.privatekey.AuthoritiesPK;
 import pl.com.tutti.tuttiserver.entity.UserDetails;
 import pl.com.tutti.tuttiserver.entity.Users;
+import pl.com.tutti.tuttiserver.rest.controller.utils.ResponseFactory;
 import pl.com.tutti.tuttiserver.rest.data.RegistrationForm;
-import pl.com.tutti.tuttiserver.rest.response.BasicResponse;
 import pl.com.tutti.tuttiserver.service.UsersService;
 
 import javax.validation.Valid;
@@ -60,11 +59,6 @@ public class AuthenticationRestController {
 
 		usersService.save(registered);
 
-		BasicResponse basicResponse = new BasicResponse();
-		basicResponse.setMessage("Registered succesfully!");
-		basicResponse.setStatus(HttpStatus.OK.value());
-		basicResponse.setTimeStamp(System.currentTimeMillis());
-
-		return new ResponseEntity<>(basicResponse, HttpStatus.OK);
+		return ResponseFactory.createBasicResponse("registration");
 	}
 }

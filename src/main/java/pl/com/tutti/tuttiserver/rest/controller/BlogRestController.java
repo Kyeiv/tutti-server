@@ -1,16 +1,15 @@
 package pl.com.tutti.tuttiserver.rest.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.com.tutti.tuttiserver.entity.Post;
 import pl.com.tutti.tuttiserver.entity.Users;
+import pl.com.tutti.tuttiserver.rest.controller.utils.ResponseFactory;
 import pl.com.tutti.tuttiserver.rest.exception.PostExistsException;
 import pl.com.tutti.tuttiserver.rest.exception.PostNotExistsException;
 import pl.com.tutti.tuttiserver.rest.exception.UnauthorizedException;
 import pl.com.tutti.tuttiserver.rest.data.PostData;
-import pl.com.tutti.tuttiserver.rest.response.*;
 import pl.com.tutti.tuttiserver.service.PostsService;
 import pl.com.tutti.tuttiserver.service.UsersService;
 
@@ -39,13 +38,7 @@ public class BlogRestController {
         else
             posts.stream().forEach(spec -> spec.setUsername(null));
 
-        PostsResponse postsResponse = new PostsResponse();
-        postsResponse.setMessage("getPosts");
-        postsResponse.setStatus(HttpStatus.OK.value());
-        postsResponse.setTimeStamp(System.currentTimeMillis());
-        postsResponse.setPosts(posts);
-
-        return new ResponseEntity<>(postsResponse, HttpStatus.OK);
+        return ResponseFactory.createPayloadResponse(posts, "getPosts");
     }
 
     @PostMapping("/posts")
@@ -71,12 +64,7 @@ public class BlogRestController {
 
         postsService.save(post);
 
-        BasicResponse basicResponse = new BasicResponse();
-        basicResponse.setMessage("updatePost");
-        basicResponse.setStatus(HttpStatus.OK.value());
-        basicResponse.setTimeStamp(System.currentTimeMillis());
-
-        return new ResponseEntity<>(basicResponse, HttpStatus.OK);
+        return ResponseFactory.createBasicResponse("updatePost");
     }
 
     @DeleteMapping("/posts/{id}")
@@ -88,12 +76,7 @@ public class BlogRestController {
 
         postsService.delete(post);
 
-        BasicResponse basicResponse = new BasicResponse();
-        basicResponse.setMessage("deletePost");
-        basicResponse.setStatus(HttpStatus.OK.value());
-        basicResponse.setTimeStamp(System.currentTimeMillis());
-
-        return new ResponseEntity<>(basicResponse, HttpStatus.OK);
+        return ResponseFactory.createBasicResponse("deletePost");
     }
 
     private ResponseEntity getResponseEntity(@RequestBody @Valid PostData postData, Principal principal) {
@@ -112,13 +95,7 @@ public class BlogRestController {
 
         postsService.save(post);
 
-        ElementIdResponse elementIdResponse = new ElementIdResponse();
-        elementIdResponse.setMessage("addPost");
-        elementIdResponse.setStatus(HttpStatus.OK.value());
-        elementIdResponse.setTimeStamp(System.currentTimeMillis());
-        elementIdResponse.setElementId(post.getId());
-
-        return new ResponseEntity<>(elementIdResponse, HttpStatus.OK);
+        return ResponseFactory.createPayloadResponse(post.getId(), "addPost");
     }
 
     @GetMapping("/post/{id}")
@@ -134,12 +111,6 @@ public class BlogRestController {
         postData.setTitle(post.getTitle());
         postData.setCreatedAt(post.getCreatedAt());
 
-        PostDataResponse postDataResponse = new PostDataResponse();
-        postDataResponse.setMessage("getPost");
-        postDataResponse.setStatus(HttpStatus.OK.value());
-        postDataResponse.setTimeStamp(System.currentTimeMillis());
-        postDataResponse.setPostData(postData);
-
-        return new ResponseEntity<>(postDataResponse, HttpStatus.OK);
+        return ResponseFactory.createPayloadResponse(postData, "getPost");
     }
 }

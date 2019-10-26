@@ -1,18 +1,15 @@
 package pl.com.tutti.tuttiserver.rest.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.com.tutti.tuttiserver.entity.Specialization;
 import pl.com.tutti.tuttiserver.entity.Users;
+import pl.com.tutti.tuttiserver.rest.controller.utils.ResponseFactory;
 import pl.com.tutti.tuttiserver.rest.exception.SpecializationExistsException;
 import pl.com.tutti.tuttiserver.rest.exception.SpecializationNotExistsException;
 import pl.com.tutti.tuttiserver.rest.exception.UnauthorizedException;
 import pl.com.tutti.tuttiserver.rest.data.SpecializationData;
-import pl.com.tutti.tuttiserver.rest.response.BasicResponse;
-import pl.com.tutti.tuttiserver.rest.response.ElementIdResponse;
-import pl.com.tutti.tuttiserver.rest.response.SpecializationsResponse;
 import pl.com.tutti.tuttiserver.service.SpecializationsService;
 import pl.com.tutti.tuttiserver.service.UsersService;
 
@@ -41,13 +38,7 @@ public class SpecializationRestController {
         else
             specializations.stream().forEach(spec -> spec.setUsername(null));
 
-        SpecializationsResponse specializationsResponse = new SpecializationsResponse();
-        specializationsResponse.setMessage("getSpecializations");
-        specializationsResponse.setStatus(HttpStatus.OK.value());
-        specializationsResponse.setTimeStamp(System.currentTimeMillis());
-        specializationsResponse.setSpecializations(specializations);
-
-        return new ResponseEntity<>(specializationsResponse, HttpStatus.OK);
+        return ResponseFactory.createPayloadResponse(specializations, "getSpecializations");
     }
 
     @PostMapping("/specializations")
@@ -75,12 +66,7 @@ public class SpecializationRestController {
 
         specializationsService.save(specialization);
 
-        BasicResponse basicResponse = new BasicResponse();
-        basicResponse.setMessage("updateSpecialization");
-        basicResponse.setStatus(HttpStatus.OK.value());
-        basicResponse.setTimeStamp(System.currentTimeMillis());
-
-        return new ResponseEntity<>(basicResponse, HttpStatus.OK);
+        return ResponseFactory.createBasicResponse("updateSpecialization");
     }
 
     @DeleteMapping("/specializations/{id}")
@@ -92,12 +78,7 @@ public class SpecializationRestController {
 
         specializationsService.delete(specialization);
 
-        BasicResponse basicResponse = new BasicResponse();
-        basicResponse.setMessage("deleteSpecialization");
-        basicResponse.setStatus(HttpStatus.OK.value());
-        basicResponse.setTimeStamp(System.currentTimeMillis());
-
-        return new ResponseEntity<>(basicResponse, HttpStatus.OK);
+        return ResponseFactory.createBasicResponse("deleteSpecialization");
     }
 
     private ResponseEntity getResponseEntity(@RequestBody @Valid SpecializationData specializationData, Principal principal) {
@@ -119,12 +100,6 @@ public class SpecializationRestController {
 
         specializationsService.save(specialization);
 
-        ElementIdResponse elementIdResponse = new ElementIdResponse();
-        elementIdResponse.setMessage("addSpecialization");
-        elementIdResponse.setStatus(HttpStatus.OK.value());
-        elementIdResponse.setTimeStamp(System.currentTimeMillis());
-        elementIdResponse.setElementId(specialization.getId());
-
-        return new ResponseEntity<>(elementIdResponse, HttpStatus.OK);
+        return ResponseFactory.createPayloadResponse(specialization.getId(), "addSpecialization");
     }
 }

@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ElementIdResponse extends BasicResponse {
-    private Integer elementId;
+public class PayloadResponse<T> extends BasicResponse {
+    private T payload;
 }
