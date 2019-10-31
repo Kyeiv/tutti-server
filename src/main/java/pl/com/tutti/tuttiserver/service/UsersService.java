@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.com.tutti.tuttiserver.entity.Users;
 import pl.com.tutti.tuttiserver.repository.UsersRepository;
+import pl.com.tutti.tuttiserver.rest.data.SearchTeachersData;
 
 import java.util.List;
 
@@ -40,5 +41,15 @@ public class UsersService {
     public Users getWithPosts(Users user) {
         user.getPosts();
         return user;
+    }
+
+    public List<Users> findByCityAndSpecNameAndSpecLevel(SearchTeachersData searchTeachersData) {
+        List<Users> users = usersRepository.findByCityAndSpecNameAndSpecLevel(
+                  searchTeachersData.getCity()
+                , searchTeachersData.getSpecializationName()
+                , searchTeachersData.getLevel()
+        );
+
+        return users;
     }
 }
