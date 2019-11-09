@@ -102,8 +102,6 @@ public class BlogRestController {
     @ResponseBody
     public ResponseEntity getPost(@PathVariable("id") Integer id, Principal principal) {
         Post post = postsService.findById(id);
-        if(!post.getUsername().getUsername().equals(principal.getName()))
-            throw new UnauthorizedException("No rights to get this entry!");
 
         PostData postData = new PostData();
         postData.setId(post.getId());
