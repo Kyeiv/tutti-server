@@ -43,6 +43,16 @@ public class UsersService {
         return user;
     }
 
+    public Users getWithAppointmentsAsTutor(Users user) {
+        user.getAppointmentsAsTutor();
+        return user;
+    }
+
+    public Users getWithAppointmentsAsStudent(Users user) {
+        user.getAppointmentsAsStudent();
+        return user;
+    }
+
     public List<Users> findByCityAndSpecNameAndSpecLevel(SearchTeachersData searchTeachersData) {
         List<Users> users = usersRepository.findByCityAndSpecNameAndSpecLevel(
                   searchTeachersData.getCity()
