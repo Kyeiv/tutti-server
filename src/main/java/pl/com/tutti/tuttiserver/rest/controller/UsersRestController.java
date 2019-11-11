@@ -1,22 +1,24 @@
 package pl.com.tutti.tuttiserver.rest.controller;
 
-import java.security.Principal;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.AllArgsConstructor;
+import lombok.val;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.com.tutti.tuttiserver.entity.Appointment;
 import pl.com.tutti.tuttiserver.entity.Availbility;
-import pl.com.tutti.tuttiserver.entity.Specialization;
 import pl.com.tutti.tuttiserver.entity.Users;
 import pl.com.tutti.tuttiserver.rest.controller.utils.ResponseFactory;
+import pl.com.tutti.tuttiserver.rest.data.NewAppointmentData;
 import pl.com.tutti.tuttiserver.rest.data.SearchTeachersData;
 import pl.com.tutti.tuttiserver.rest.data.TeacherDayData;
+import pl.com.tutti.tuttiserver.service.AppointmentsService;
 import pl.com.tutti.tuttiserver.service.UsersService;
 
 import javax.validation.Valid;
@@ -27,6 +29,7 @@ import javax.validation.Valid;
 public class UsersRestController {
 	
 	private UsersService usersService;
+	private AppointmentsService appointmentsService;
 
 	@PostMapping("/users/search")
 	public ResponseEntity searchByCitySpecLevelSpecName(@Valid @RequestBody SearchTeachersData searchTeachersData){
@@ -86,9 +89,31 @@ public class UsersRestController {
 				hoursAvailable.put(i,false);
 		}
 
-		for (Map.Entry<Long, Boolean> entry : hoursAvailable.entrySet()) {
-			System.out.println(entry.getKey() + ":" + entry.getValue());
-		}
 		return ResponseFactory.createPayloadResponse(hoursAvailable, "getAvailbilityAtGivenDay");
+	}
+
+	@PostMapping("/users/appointment")
+	ResponseEntity addNewAppointment(@Valid @RequestBody NewAppointmentData newAppointmentData) {
+
+		Users student = usersService.findByUsername(newAppointmentData.getStudentName());
+		student = usersService.getWithAppointmentsAsStudent(student);
+
+		Users teacher = usersService.findByUsername(newAppointmentData.getTeacherName());
+		teacher = usersService.getWithAppointmentsAsTutor(teacher);
+
+		for(LocalDateTime dateTime: newAppointmentData.getDateTimes()) {
+			Appointment appointment = new Appointment();
+
+			appointment.setDurationMinutes(1);
+			val localDateTime = dateTime.atZone(ZoneOffset.UTC).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
+			appointment.setScheduledDatetime(localDateTime);
+
+			teacher.addAppointmentAsTutor(appointment);
+			student.addAppointmentAsStudent(appointment);
+
+			appointmentsService.save(appointment);
+		}
+
+		return ResponseFactory.createBasicResponse("addNewAppointment");
 	}
 }

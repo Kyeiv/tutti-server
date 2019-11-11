@@ -46,12 +46,12 @@ public class Users {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
     private List<Post> posts;
 
-    public void appointmentAsTutor(Appointment appointment) {
+    public void addAppointmentAsTutor(Appointment appointment) {
         this.appointmentsAsTutor.add(appointment);
         appointment.setTutor(this);
     }
 
-    public void appointmentAsStudent(Appointment appointment) {
+    public void addAppointmentAsStudent(Appointment appointment) {
         this.appointmentsAsStudent.add(appointment);
         appointment.setStudent(this);
     }
