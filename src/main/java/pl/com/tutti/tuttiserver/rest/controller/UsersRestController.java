@@ -1,5 +1,6 @@
 package pl.com.tutti.tuttiserver.rest.controller;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -9,15 +10,19 @@ import java.util.stream.Collectors;
 
 import lombok.AllArgsConstructor;
 import lombok.val;
+import lombok.var;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import pl.com.tutti.tuttiserver.entity.Appointment;
 import pl.com.tutti.tuttiserver.entity.Availbility;
 import pl.com.tutti.tuttiserver.entity.Users;
 import pl.com.tutti.tuttiserver.rest.controller.utils.ResponseFactory;
+import pl.com.tutti.tuttiserver.rest.data.AppointmentData;
 import pl.com.tutti.tuttiserver.rest.data.NewAppointmentData;
 import pl.com.tutti.tuttiserver.rest.data.SearchTeachersData;
 import pl.com.tutti.tuttiserver.rest.data.TeacherDayData;
+import pl.com.tutti.tuttiserver.rest.exception.UnauthorizedException;
 import pl.com.tutti.tuttiserver.service.AppointmentsService;
 import pl.com.tutti.tuttiserver.service.UsersService;
 
@@ -115,5 +120,76 @@ public class UsersRestController {
 		}
 
 		return ResponseFactory.createBasicResponse("addNewAppointment");
+	}
+
+	@GetMapping("users/my-appointments")
+	ResponseEntity getMyAppointments(Principal principal, Authentication authentication) {
+
+		val role = authentication.getAuthorities().iterator().next();
+		val roleName = role.getAuthority();
+
+		var user = usersService.findByUsername(principal.getName());
+
+		if(roleName.equals("TEACHER")){
+			user = usersService.getWithAppointmentsAsTutor(user);
+			val appointmentsDataList = convertToAppointmentsListAsTeacher(user.getAppointmentsAsTutor());
+			return ResponseFactory.createPayloadResponse(appointmentsDataList, "getMyAppointments");
+		} else {
+			user = usersService.getWithAppointmentsAsStudent(user);
+			val appointmentsDataList = convertToAppointmentsListAsStudent(user.getAppointmentsAsStudent());
+			return ResponseFactory.createPayloadResponse(appointmentsDataList, "getMyAppointments");
+		}
+	}
+
+	@DeleteMapping("users/remove-appointment/{id}")
+	ResponseEntity deleteAppointment(@PathVariable("id") Integer id, Principal principal) {
+
+		var appointment = appointmentsService.findById(id);
+
+		val studentName = appointment.getStudent().getUsername();
+		val tutorName = appointment.getTutor().getUsername();
+
+		if(!principal.getName().equals(studentName) && !principal.getName().equals(tutorName))
+			throw new UnauthorizedException("You are not a teacher, nor a student in this appointment!");
+
+		appointmentsService.delete(appointment);
+
+		return ResponseFactory.createBasicResponse("deleteAppointment");
+	}
+
+	List<AppointmentData> convertToAppointmentsListAsTeacher(List<Appointment> appointments) {
+
+		List<AppointmentData> newList = appointments.stream().map(
+				a ->
+					new AppointmentData(
+							a.getId(),
+							a.getStudent().getUserDetails().getSurname(),
+							a.getStudent().getUserDetails().getName(),
+							a.getStudent().getUsername(),
+							a.getStudent().getUserDetails().getPhone(),
+							a.getStudent().getUserDetails().getMail(),
+							a.getScheduledDatetime()
+					)
+				).collect(Collectors.toList());
+
+		return newList;
+	}
+
+	List<AppointmentData> convertToAppointmentsListAsStudent(List<Appointment> appointments) {
+
+		List<AppointmentData> newList = appointments.stream().map(
+				a ->
+						new AppointmentData(
+								a.getId(),
+								a.getTutor().getUserDetails().getSurname(),
+								a.getTutor().getUserDetails().getName(),
+								a.getTutor().getUsername(),
+								a.getTutor().getUserDetails().getPhone(),
+								a.getTutor().getUserDetails().getMail(),
+								a.getScheduledDatetime()
+						)
+		).collect(Collectors.toList());
+
+		return newList;
 	}
 }
