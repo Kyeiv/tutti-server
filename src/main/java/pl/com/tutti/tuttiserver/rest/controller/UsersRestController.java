@@ -8,6 +8,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import javafx.util.Pair;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import lombok.var;
@@ -16,12 +17,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import pl.com.tutti.tuttiserver.entity.Appointment;
 import pl.com.tutti.tuttiserver.entity.Availbility;
+import pl.com.tutti.tuttiserver.entity.Specialization;
 import pl.com.tutti.tuttiserver.entity.Users;
 import pl.com.tutti.tuttiserver.rest.controller.utils.ResponseFactory;
-import pl.com.tutti.tuttiserver.rest.data.AppointmentData;
-import pl.com.tutti.tuttiserver.rest.data.NewAppointmentData;
-import pl.com.tutti.tuttiserver.rest.data.SearchTeachersData;
-import pl.com.tutti.tuttiserver.rest.data.TeacherDayData;
+import pl.com.tutti.tuttiserver.rest.data.*;
 import pl.com.tutti.tuttiserver.rest.exception.UnauthorizedException;
 import pl.com.tutti.tuttiserver.service.AppointmentsService;
 import pl.com.tutti.tuttiserver.service.UsersService;
@@ -38,13 +37,16 @@ public class UsersRestController {
 
 	@PostMapping("/users/search")
 	public ResponseEntity searchByCitySpecLevelSpecName(@Valid @RequestBody SearchTeachersData searchTeachersData){
-		List<Users> users = usersService.findByCityAndSpecNameAndSpecLevel(searchTeachersData);
+		List<Pair<Users, Specialization>> users = usersService.findByCityAndSpecNameAndSpecLevel(searchTeachersData);
+		List<FoundTeacherData> foundTeachersData = new ArrayList<>();
+		for(Pair<Users, Specialization> element: users){
+			element.getKey().setSpecializations(null);
+			element.getKey().setAvailbilities(null);
+			element.getKey().setPosts(null);
+			element.getKey().setAppointmentsAsTutor(null);
+			element.getKey().setPassword(null);
 
-		for(Users user: users){
-			user.setSpecializations(null);
-			user.setAvailbilities(null);
-			user.setPosts(null);
-			user.setAppointmentsAsTutor(null);
+			element.getValue().setUsername(null);
 		}
 
 		return ResponseFactory.createPayloadResponse(users, "searchByCitySpecLevelSpecName");

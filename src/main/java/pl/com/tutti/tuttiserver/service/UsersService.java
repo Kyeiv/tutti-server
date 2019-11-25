@@ -1,13 +1,16 @@
 package pl.com.tutti.tuttiserver.service;
 
+import javafx.util.Pair;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import pl.com.tutti.tuttiserver.entity.Specialization;
 import pl.com.tutti.tuttiserver.entity.Users;
 import pl.com.tutti.tuttiserver.repository.UsersRepository;
 import pl.com.tutti.tuttiserver.rest.data.SearchTeachersData;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -53,13 +56,15 @@ public class UsersService {
         return user;
     }
 
-    public List<Users> findByCityAndSpecNameAndSpecLevel(SearchTeachersData searchTeachersData) {
-        List<Users> users = usersRepository.findByCityAndSpecNameAndSpecLevel(
+    public List<Pair<Users, Specialization>> findByCityAndSpecNameAndSpecLevel(SearchTeachersData searchTeachersData) {
+        List<Object[]> users = usersRepository.findByCityAndSpecNameAndSpecLevel(
                   searchTeachersData.getCity()
                 , searchTeachersData.getSpecializationName()
                 , searchTeachersData.getLevel()
         );
 
-        return users;
+        return users
+                .stream()
+                .map( res -> new Pair<Users,Specialization>((Users) res[0], (Specialization) res[1]) ).collect(Collectors.toList());
     }
 }
