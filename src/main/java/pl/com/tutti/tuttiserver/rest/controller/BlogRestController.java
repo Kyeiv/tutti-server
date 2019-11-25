@@ -108,6 +108,7 @@ public class BlogRestController {
         postData.setContent(post.getContent());
         postData.setTitle(post.getTitle());
         postData.setCreatedAt(post.getCreatedAt());
+        postData.setUsername(post.getUsername().getUsername());
 
         return ResponseFactory.createPayloadResponse(postData, "getPost");
     }

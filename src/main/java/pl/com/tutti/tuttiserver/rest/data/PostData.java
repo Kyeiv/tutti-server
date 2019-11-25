@@ -16,4 +16,5 @@ public class PostData {
     private String title;
     private String content;
     private LocalDateTime createdAt;
+    private String username;
 }
