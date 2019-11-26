@@ -13,3 +13,7 @@ spring:
     rest:
       base-path: /api/basic
       default-page-size: 10000000
+
+jwt:
+  expirationTime: 3600000
+  secret: 14E0277BCDC57D5763C356A93B2388D50B8E65258BA7862FBD7989202CA077C9

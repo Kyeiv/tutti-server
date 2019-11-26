@@ -40,7 +40,7 @@ public class Users {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
     private List<Availbility> availbilities;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "authoritiesPK.username")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "authoritiesPK.username", fetch = FetchType.EAGER)
     private List<Authorities> authorities;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
