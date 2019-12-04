@@ -1,7 +1,6 @@
 package pl.com.tutti.tuttiserver.config.authentication;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,17 +25,17 @@ public class MyUserDetails implements UserDetailsService {
             throw new UsernameNotFoundException("User '" + username + "' not found");
         }
 
-        return org.springframework.security.core.userdetails.User//
-                .withUsername(username)//
-                .password(user.getPassword())//
+        return org.springframework.security.core.userdetails.User
+                .withUsername(username)
+                .password(user.getPassword())
                 .authorities(user.getAuthorities().stream().map(
                         auth->
                                 new SimpleGrantedAuthority(auth.getAuthoritiesPK().getAuthority())
-                ).collect(Collectors.toList()))//
-                .accountExpired(false)//
-                .accountLocked(false)//
-                .credentialsExpired(false)//
-                .disabled(!user.getEnabled())//
+                ).collect(Collectors.toList()))
+                .accountExpired(false)
+                .accountLocked(false)
+                .credentialsExpired(false)
+                .disabled(!user.getEnabled())
                 .build();
     }
 }

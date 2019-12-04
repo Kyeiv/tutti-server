@@ -2,6 +2,7 @@ package pl.com.tutti.tuttiserver.rest.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pl.com.tutti.tuttiserver.entity.Authorities;
 import pl.com.tutti.tuttiserver.entity.privatekey.AuthoritiesPK;
@@ -22,6 +23,7 @@ import java.util.List;
 public class AuthenticationRestController {
 
 	private UsersService usersService;
+	private PasswordEncoder passwordEncoder;
 
 	@GetMapping("/whoami")
 	public Principal getPrincipal(Principal principal) {
@@ -44,7 +46,7 @@ public class AuthenticationRestController {
 		registered.setEnabled(Boolean.TRUE);
 
 		registered.setUsername(registrationForm.getUsername());
-		registered.setPassword("{noop}" + registrationForm.getPassword());
+		registered.setPassword(passwordEncoder.encode(registrationForm.getPassword()));
 
 		UserDetails userDetails = new UserDetails().builder()
 				.city(registrationForm.getCity())
