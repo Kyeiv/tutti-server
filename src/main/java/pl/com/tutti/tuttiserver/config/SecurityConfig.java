@@ -97,7 +97,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		.addFilterAfter(new CsrfTokenResponseHeaderBindingFilter(), CsrfFilter.class);
 		http.csrf().disable();
 		http
 				.cors()
