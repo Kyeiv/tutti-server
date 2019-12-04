@@ -28,10 +28,6 @@ public class Appointment {
 
     private LocalDateTime scheduledDatetime;
 
-    private Integer durationMinutes;
-
-    private String state;
-
     @ManyToOne
     @JoinColumn(name = "tutor")
     private Users tutor;

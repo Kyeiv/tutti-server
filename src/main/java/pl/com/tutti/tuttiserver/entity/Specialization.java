@@ -33,9 +33,5 @@ public class Specialization {
 
     private String name;
 
-    private Integer likes;
-
-    private Integer dislikes;
-
     private Float salary;
 }

@@ -58,8 +58,6 @@ public class SpecializationRestController {
         if(!specialization.getUsername().getUsername().equals(principal.getName()))
             throw new UnauthorizedException("No rights to patch this entry!");
 
-        specialization.setDislikes(specializationData.getDislikes());
-        specialization.setLikes(specializationData.getLikes());
         specialization.setLevel(specializationData.getLevel());
         specialization.setName(specializationData.getName());
         specialization.setSalary(specializationData.getSalary());
@@ -86,8 +84,6 @@ public class SpecializationRestController {
 
         Specialization specialization = new Specialization();
         specialization.setUsername(user);
-        specialization.setDislikes(specializationData.getDislikes());
-        specialization.setLikes(specializationData.getLikes());
         specialization.setLevel(specializationData.getLevel());
         specialization.setName(specializationData.getName());
         specialization.setSalary(specializationData.getSalary());

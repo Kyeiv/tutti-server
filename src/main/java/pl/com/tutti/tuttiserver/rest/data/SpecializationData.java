@@ -10,8 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SpecializationData {
-    private Integer likes;
-    private Integer dislikes;
     private String level;
     private String name;
     private Float salary;

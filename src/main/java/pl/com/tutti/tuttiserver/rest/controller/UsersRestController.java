@@ -88,7 +88,7 @@ public class UsersRestController {
 
 		for(Appointment appointment: appointmentsAtGivenDay) {
 			long hour = appointment.getScheduledDatetime().getHour();
-			long hours = appointment.getDurationMinutes();
+			long hours = 1;
 
 			long hourEnd = hour + hours;
 
@@ -111,7 +111,6 @@ public class UsersRestController {
 		for(LocalDateTime dateTime: newAppointmentData.getDateTimes()) {
 			Appointment appointment = new Appointment();
 
-			appointment.setDurationMinutes(1);
 			val localDateTime = dateTime.atZone(ZoneOffset.UTC).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
 			appointment.setScheduledDatetime(localDateTime);
 
