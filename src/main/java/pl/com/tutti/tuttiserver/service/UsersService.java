@@ -2,6 +2,7 @@ package pl.com.tutti.tuttiserver.service;
 
 import javafx.util.Pair;
 import lombok.AllArgsConstructor;
+import lombok.val;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.com.tutti.tuttiserver.entity.Specialization;
@@ -66,5 +67,13 @@ public class UsersService {
         return users
                 .stream()
                 .map( res -> new Pair<Users,Specialization>((Users) res[0], (Specialization) res[1]) ).collect(Collectors.toList());
+    }
+
+    public boolean usernameExists(String username){
+        val usersWithUsername = usersRepository.searchForUsername(username);
+        if(usersWithUsername == null || usersWithUsername.size() == 0)
+            return false;
+
+        return  true;
     }
 }

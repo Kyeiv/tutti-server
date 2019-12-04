@@ -17,4 +17,7 @@ public interface UsersRepository extends JpaRepository<Users, String> {
             "and spec.name = ?2 " +
             "and spec.level = ?3")
     List<Object[]> findByCityAndSpecNameAndSpecLevel(String city, String specName, String specLevel);
+
+    @Query("select usr from Users usr where usr.username = ?1")
+    List<Users> searchForUsername(String username);
 }

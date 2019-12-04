@@ -10,6 +10,9 @@ import pl.com.tutti.tuttiserver.entity.UserDetails;
 import pl.com.tutti.tuttiserver.entity.Users;
 import pl.com.tutti.tuttiserver.rest.controller.utils.ResponseFactory;
 import pl.com.tutti.tuttiserver.rest.data.RegistrationForm;
+import pl.com.tutti.tuttiserver.rest.exception.EmailAlreadyExistsException;
+import pl.com.tutti.tuttiserver.rest.exception.UsernameAlreadyExistsException;
+import pl.com.tutti.tuttiserver.service.UserDetailsService;
 import pl.com.tutti.tuttiserver.service.UsersService;
 
 import javax.validation.Valid;
@@ -23,6 +26,7 @@ import java.util.List;
 public class AuthenticationRestController {
 
 	private UsersService usersService;
+	private UserDetailsService userDetailsService;
 	private PasswordEncoder passwordEncoder;
 
 	@GetMapping("/whoami")
@@ -34,6 +38,12 @@ public class AuthenticationRestController {
 	public ResponseEntity registration(
 			@Valid @RequestBody RegistrationForm registrationForm
 			) {
+
+		if(usersService.usernameExists(registrationForm.getUsername()))
+			throw new UsernameAlreadyExistsException("Username already exists!");
+
+		if(userDetailsService.mailExists(registrationForm.getMail()))
+			throw new EmailAlreadyExistsException("Email already exists!");
 
 		Users registered = new Users();
 
