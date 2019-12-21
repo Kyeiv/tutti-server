@@ -1,6 +1,7 @@
 package pl.com.tutti.tuttiserver.service;
 
-import javafx.util.Pair;
+import pl.com.tutti.tuttiserver.service.structures.Pair;
+
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

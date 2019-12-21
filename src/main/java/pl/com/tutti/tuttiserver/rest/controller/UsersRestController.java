@@ -8,7 +8,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import javafx.util.Pair;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import lombok.var;
@@ -24,6 +23,7 @@ import pl.com.tutti.tuttiserver.rest.data.*;
 import pl.com.tutti.tuttiserver.rest.exception.UnauthorizedException;
 import pl.com.tutti.tuttiserver.service.AppointmentsService;
 import pl.com.tutti.tuttiserver.service.UsersService;
+import pl.com.tutti.tuttiserver.service.structures.Pair;
 
 import javax.validation.Valid;
 

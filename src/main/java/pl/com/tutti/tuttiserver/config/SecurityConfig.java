@@ -29,7 +29,7 @@ import pl.com.tutti.tuttiserver.config.webfilter.JwtAuthorizationFilter;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity(/*debug = true*/)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final RestAuthenticationSuccessHandler authenticationSuccessHandler;
