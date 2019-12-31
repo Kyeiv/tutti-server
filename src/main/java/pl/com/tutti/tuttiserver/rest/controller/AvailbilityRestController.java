@@ -8,6 +8,7 @@ import pl.com.tutti.tuttiserver.entity.Users;
 import pl.com.tutti.tuttiserver.rest.controller.utils.ResponseFactory;
 import pl.com.tutti.tuttiserver.rest.exception.AvailbilityExistsException;
 import pl.com.tutti.tuttiserver.rest.exception.AvailbilityNotExistsException;
+import pl.com.tutti.tuttiserver.rest.exception.BadDatesValuesException;
 import pl.com.tutti.tuttiserver.rest.exception.UnauthorizedException;
 import pl.com.tutti.tuttiserver.rest.data.AvailbilityData;
 import pl.com.tutti.tuttiserver.service.AvailbilityService;
@@ -57,6 +58,10 @@ public class AvailbilityRestController {
         Availbility availbility = availbilityService.findById(availbilityData.getId());
         if(!availbility.getUsername().getUsername().equals(principal.getName()))
             throw new UnauthorizedException("No rights to patch this entry!");
+        int comparation = availbilityData.getHourBegin().compareTo(availbilityData.getHourEnd());
+        if(comparation >= 0)
+            throw new BadDatesValuesException("HourBegin must be less than hourEnd!");
+
 
         availbility.setDayOfTheWeek(availbilityData.getDayOfTheWeek());
         availbility.setHourBegin(availbilityData.getHourBegin());
@@ -81,6 +86,10 @@ public class AvailbilityRestController {
 
     private ResponseEntity getResponseEntity(@RequestBody @Valid AvailbilityData availbilityData, Principal principal) {
         Users user = usersService.findByUsername(principal.getName());
+
+        int comparation = availbilityData.getHourBegin().compareTo(availbilityData.getHourEnd());
+        if(comparation >= 0)
+            throw new BadDatesValuesException("HourBegin must be less than hourEnd!");
 
         Availbility availbility = new Availbility();
         availbility.setUsername(user);

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
 @Setter
@@ -12,8 +13,11 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AvailbilityData {
+    @NotNull
     LocalTime hourBegin;
+    @NotNull
     LocalTime hourEnd;
     Integer id;
+    @NotNull
     Integer dayOfTheWeek;
 }
